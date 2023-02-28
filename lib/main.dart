@@ -1,115 +1,258 @@
-import 'package:flutter/material.dart';
+import "package:flutter/cupertino.dart";
+import "package:flutter/material.dart";
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: product(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
+class product extends StatelessWidget {
+  const product({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+    return SafeArea(
+        child: Scaffold(
+            body: SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(25),
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.arrow_back_ios),
+                Spacer(),
+                Text(
+                  "Product Details",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                ),
+                Spacer(),
+                Icon(Icons.shopping_bag)
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+          ),
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20), topRight: Radius.circular(20)),
+            child: Stack(
+              children: [
+                Image.asset(
+                  "assets/img1.jpg",
+                  fit: BoxFit.cover,
+                  height: 350,
+                  width: 320,
+                ),
+                Positioned(
+                  right: 0,
+                  child: Container(
+                    height: 80,
+                    width: 70,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                        ),
+                        color: Color(0xffF4DCB0)),
+                    child: Center(
+                      child: Text(
+                        "\$40",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 11,
+                  left: 150,
+                  child: Container(
+                    height: 3.5,
+                    width: 30,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.white),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+          Container(
+            height: 540,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(22),
+                topRight: Radius.circular(22),
+              ),
+              color: Colors.black,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 12, top: 25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 35),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [
+                            Text(
+                              "Description",
+                              style:
+                                  TextStyle(fontSize: 20, color: Colors.white),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              height: 2,
+                              width: 160,
+                              color: Colors.white,
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          width: 50,
+                        ),
+                        Text(
+                          "Review",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 35,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: Text(
+                      "Ripped Straight Fit Jeans",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w800),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Text(
+                    """
+      Mid-rise jeans made of rigid fabric with five
+      pockets. Ripped details Front zip tly and
+      metal top button fastening.""",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          "Stock : 15",
+                          style: TextStyle(fontSize: 15, color: Colors.white),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 80,
+                      ),
+                      Text(
+                        "S",
+                        style:
+                            TextStyle(fontSize: 15, color: Color(0xffF4DCB0)),
+                      ),
+                      Spacer(),
+                      Container(
+                        height: 30,
+                        width: 30,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Color(0xffF4DCB0)),
+                        child: Center(
+                            child: Text(
+                          "M",
+                          style: TextStyle(fontSize: 15, color: Colors.black),
+                        )),
+                      ),
+                      Spacer(),
+                      Text(
+                        "L",
+                        style:
+                            TextStyle(fontSize: 15, color: Color(0xffF4DCB0)),
+                      ),
+                      Spacer(),
+                      Text(
+                        "XL",
+                        style:
+                            TextStyle(fontSize: 15, color: Color(0xffF4DCB0)),
+                      ),
+                      SizedBox(
+                        width: 30,
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 22,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    child: Row(
+                      children: [
+                        Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Color(0xffF4DCB0)),
+                                borderRadius: BorderRadius.circular(12)),
+                            child: Icon(
+                              Icons.message_rounded,
+                              color: Color(0xffF4DCB0),
+                              size: 20,
+                            )),
+                        Spacer(),
+                        Container(
+                          height: 68,
+                          width: 250,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25),
+                            color: Color(0xffF4DCB0),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "SHOP NOW",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 18),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+    )));
   }
 }
+// screen 2
